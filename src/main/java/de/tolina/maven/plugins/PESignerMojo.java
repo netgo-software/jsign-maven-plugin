@@ -76,62 +76,62 @@ public class PESignerMojo extends AbstractMojo {
 
 	/** The file to be signed. */
 	@Parameter(required = true, property = "file")
-	private File file;
+	File file;
 
 	/** The program name embedded in the signature. */
 	@Parameter(required = false, property = "name")
-	private String name;
+	String name;
 
 	/** The program URL embedded in the signature. */
 	@Parameter(required = false, property = "url")
-	private String url;
+	String url;
 
 	/** The digest algorithm to use for the signature. */
 	// not supported yet 
 	// @Parameter(required = false)
-	private String algorithm;
+	String algorithm;
 
 	/** The keystore file or URL. Either {@link #keystore} or {@link #certfile} and {@link #keyfile} are required. */
 	@Parameter(required = false, property = "keystore")
-	private String keystore;
+	String keystore;
 
 	/** The password for the keystore. */
 	@Parameter(required = false, property = "storepass")
-	private String storepass;
+	String storepass;
 
 	/** The type of the keystore. */
 	@Parameter(required = false, defaultValue = "JKS", property = "storetype")
-	private String storetype;
+	String storetype;
 
 	/** The alias of the certificate in the keystore. Required if {@link #keystore} is specified. */
 	@Parameter(required = false, property = "alias")
-	private String alias;
+	String alias;
 
 	/** The file containing the certificate chain (PKCS#7 format). 
 	 * Either {@link #keystore} or {@link #certfile} and {@link #keyfile} are required. */
 	@Parameter(required = false, property = "certfile")
-	private String certfile;
+	String certfile;
 
 	/** The file containing the private key (PVK format) */
 	@Parameter(required = false, property = "keyfile")
-	private String keyfile;
+	String keyfile;
 
 	/** The password for the key in the store (if different from the keystore password) or in the keyfile. 
 	 * Either {@link #keystore} or {@link #certfile} and {@link #keyfile} are required. */
 	@Parameter(required = false, property = "keypass")
-	private String keypass;
+	String keypass;
 
 	/** The URL of the timestamping authority. */
 	@Parameter(required = false, property = "tsaurl")
-	private String tsaurl;
+	String tsaurl;
 
 	/** The protocol used for the timestamping. */
 	@Parameter(required = false, defaultValue = "AUTHENTICODE", property = "tsmode")
-	private TimestampingMode tsmode;
+	TimestampingMode tsmode;
 
 	/** The currently executed project */
 	@Parameter(readonly = true, required = true, defaultValue = "${project}")
-	private MavenProject project;
+	MavenProject project;
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
@@ -141,10 +141,10 @@ public class PESignerMojo extends AbstractMojo {
 
 		// some exciting parameter validation...
 		if (keystore == null && keyfile == null && certfile == null) {
-			throw new MojoFailureException("keystore attribute, or keyfile and certfile attributes must be set");
+			throw new MojoFailureException("Keystore attribute or keyfile and certfile attributes must be set");
 		}
 		if (keystore != null && (keyfile != null || certfile != null)) {
-			throw new MojoFailureException("keystore attribute can't be mixed with keyfile or certfile");
+			throw new MojoFailureException("Keystore attribute can't be mixed with keyfile or certfile");
 		}
 
 		if (keystore != null) {
@@ -158,7 +158,7 @@ public class PESignerMojo extends AbstractMojo {
 			final KeyStore ks = loadKeystore(storetype, keystore, storepass);
 
 			if (alias == null) {
-				throw new MojoFailureException("alias attribute must be set");
+				throw new MojoFailureException("Alias attribute must be set");
 			}
 
 			try {
@@ -188,7 +188,7 @@ public class PESignerMojo extends AbstractMojo {
 		} else {
 			// separate private key and certificate files (PVK/SPC)
 			if (keyfile == null) {
-				throw new MojoFailureException("keyfile attribute must be set");
+				throw new MojoFailureException("Keyfile attribute must be set");
 			}
 
 			final File key = new File(keyfile);
@@ -196,7 +196,7 @@ public class PESignerMojo extends AbstractMojo {
 				throw new MojoFailureException("The keyfile " + keyfile + " couldn't be found");
 			}
 			if (certfile == null) {
-				throw new MojoFailureException("certfile attribute must be set");
+				throw new MojoFailureException("Certfile attribute must be set");
 			}
 			final File cert = new File(certfile);
 			if (!cert.exists()) {
@@ -223,7 +223,7 @@ public class PESignerMojo extends AbstractMojo {
 		}
 
 		if (file == null) {
-			throw new MojoFailureException("file attribute must be set");
+			throw new MojoFailureException("File attribute must be set");
 		}
 		if (!file.exists()) {
 			throw new MojoFailureException("The file " + file + " couldn't be found");
@@ -235,8 +235,6 @@ public class PESignerMojo extends AbstractMojo {
 		} catch (final IOException e) {
 			throw new MojoFailureException("Couldn't open the executable file " + file, e);
 		}
-
-		//		initializeProxy(proxyHost, proxyPort, null, null);
 
 		// and now the actual work!
 		final PESigner signer = new PESigner(chain, privateKey) //
@@ -272,7 +270,7 @@ public class PESignerMojo extends AbstractMojo {
 		try {
 			ks = KeyStore.getInstance(type);
 		} catch (final KeyStoreException e) {
-			throw new MojoFailureException("keystore type '" + type + "' is not supported", e);
+			throw new MojoFailureException("Keystore type '" + type + "' is not supported", e);
 		}
 
 		InputStream in = null;
@@ -287,7 +285,7 @@ public class PESignerMojo extends AbstractMojo {
 			ks.load(in, pass != null ? pass.toCharArray() : null);
 
 		} catch (final Exception e) {
-			throw new MojoFailureException("Unable to load the keystore " + store, e);
+			throw new MojoFailureException(String.format("Unable to load the keystore '%s'", store), e);
 		} finally {
 			try {
 				if (in != null) {
