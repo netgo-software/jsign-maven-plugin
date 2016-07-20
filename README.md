@@ -59,6 +59,7 @@ or configure your POM
 
 Changes
 =======
+1.0.1 (in development)
 
 1.0.0
 * Support http(s) keystore locations 
