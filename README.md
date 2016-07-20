@@ -38,7 +38,7 @@ or configure your POM
         <plugin>
           <groupId>de.tolina.maven.plugins</groupId>
             <artifactId>jsign-maven-plugin</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0</version>
             <executions>
               <execution>
                 <phase>package</phase>
@@ -60,6 +60,6 @@ or configure your POM
 Changes
 =======
 
-Version 1.0.0, in development
+1.0.0
 * Support http(s) keystore locations 
 * Support proxies
