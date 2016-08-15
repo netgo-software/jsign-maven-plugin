@@ -60,6 +60,7 @@ or configure your POM
 Changes
 =======
 1.0.1 (in development)
+* use official JSign artifact (net.jsign:jsign:1.3.0)
 
 1.0.0
 * Support http(s) keystore locations 
