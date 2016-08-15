@@ -10,18 +10,6 @@ _maven-jsign-plugin_ is free to use and licensed under the Apache License versio
 Build
 =====
 
-Since there's no JSign in Maven Central yet, clone or download [JSign](https://github.com/arxes-tolina/jsign) and build it with
- 
-`mvn clean install`
-
-If you are behind a proxy, some tests will fail, so assumning your system has a system-wide proxy set, build with 
-
-`mvn clean install -Djava.net.useSystemProxies=true`
-
-You can also explicitly provide proxy settings by `-Dhttp.proxyHost=..., -Dhttp.proxyPort=...`
-
-Once installed, you can build _maven-jsign-plugin_ with 
-
 `mvn clean install`
 
 Usage
@@ -38,7 +26,7 @@ or configure your POM
         <plugin>
           <groupId>de.tolina.maven.plugins</groupId>
             <artifactId>jsign-maven-plugin</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
             <executions>
               <execution>
                 <phase>package</phase>
