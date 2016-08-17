@@ -48,25 +48,25 @@ import net.jsign.timestamp.TimestampingMode;
  * Signing and timestamp a Windows executable file.
  *
  * Parameters:
- * file=&lt;FILE&gt;          The file to sign
- * keystore=&lt;FILEgt;      The keystore file
- * storepass &lt;PASSWORDgt; The password to open the keystore
- * storetype &lt;TYPEgt;     The type of the keystore:
+ * file &lt;FILE>          The file to sign
+ * keystore &lt;FILE>      The keystore file
+ * storepass &lt;PASSWORD> The password to open the keystore
+ * storetype &lt;TYPE>     The type of the keystore:
  *                      - JKS: Java keystore (.jks files)
  *                      - PKCS12: Standard PKCS#12 keystore (.p12 or .pfx files)
- * alias &lt;NAMEgt;         The alias of the certificate used for signing in the keystore.
- * keypass &lt;PASSWORDgt;   The password of the private key. When using a keystore,
+ * alias &lt;NAME>         The alias of the certificate used for signing in the keystore.
+ * keypass &lt;PASSWORD>   The password of the private key. When using a keystore,
  *                         this parameter can be omitted if the keystore shares the
  *                         same password.
- * keyfile &lt;FILEgt;       The file containing the private key. Only PVK files are
+ * keyfile &lt;FILE>       The file containing the private key. Only PVK files are
  *                         supported.
- * certfile &lt;FILEgt;      The file containing the PKCS#7 certificate chain
+ * certfile &lt;FILE>      The file containing the PKCS#7 certificate chain
  *                         (.p7b or .spc files).
- * alg &lt;ALGORITHMgt;      The digest algorithm (SHA-1, SHA-256, SHA-384 or SHA-512)
- * tsaurl &lt;URLgt;         The URL of the timestamping authority.
- * tsmode &lt;MODEgt;        The timestamping mode (RFC3161 or Authenticode)
- * name &lt;NAMEgt;          The name of the application
- * url &lt;URLgt;            The URL of the application
+ * alg &lt;ALGORITHM>      The digest algorithm (SHA-1, SHA-256, SHA-384 or SHA-512)
+ * tsaurl &lt;URL>         The URL of the timestamping authority.
+ * tsmode &lt;MODE>        The timestamping mode (RFC3161 or Authenticode)
+ * name &lt;NAME>          The name of the application
+ * url &lt;URL>            The URL of the application
  * </pre>
  * @author Frank Jakop
  * @since 1.0
